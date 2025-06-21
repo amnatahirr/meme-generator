@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react'
 
 
 export default function Meme() {
-  const [memeImage,setMemeImage]=useState({
+  const [memeImage,setMemeImage]=useState(
+    {
     randomImage:"http://i.imgflip.com/1bij.jpg",
     topText:"",
     bottomText:""
 
-  });
+  }
+);
   const [allMemeIamges,setAllMemeImages]=useState([]);
+
     function handleOnclick(){
-        
         const randomNumber=Math.floor(Math.random() * allMemeIamges.length);
         const url=allMemeIamges[randomNumber].url;
         setMemeImage((previmg)=>{
@@ -21,6 +23,7 @@ export default function Meme() {
         });
        
     }
+
     function handleChnge( event){
       const {name,value}=event.target;
       setMemeImage((prevData) => ({
@@ -29,7 +32,8 @@ export default function Meme() {
       }));
     }
 
-    useEffect(function(){
+    useEffect(
+      function(){
       fetch("https://api.imgflip.com/get_memes")
       .then(res=>res.json())
       .then(data=>setAllMemeImages(data.data.memes))
